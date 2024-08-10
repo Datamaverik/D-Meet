@@ -2,7 +2,6 @@ import {
   Button,
   Container,
   Heading,
-  VStack,
   useDisclosure,
   Modal,
   ModalOverlay,
@@ -56,15 +55,10 @@ const Lobby = () => {
 
   return (
     <Container>
-      <VStack margin="10px">
-        <Button colorScheme="teal">Start Meeting</Button>
-        <Button colorScheme="teal" variant="ghost" onClick={onOpen}>
-          Join Meeting
-        </Button>
-      </VStack>
-      <Heading>Lobby Screen</Heading>
-
-      {/* Dialog for room ID */}
+      <Heading m={5}>Lobby Screen</Heading>
+      <Button colorScheme="teal" onClick={onOpen}>
+        Join Meeting
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

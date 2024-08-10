@@ -9,6 +9,8 @@ import {
   FormLabel,
   GridItem,
   Input,
+  InputGroup,
+  InputRightElement,
   useColorMode,
   useToast,
 } from "@chakra-ui/react";
@@ -16,7 +18,7 @@ import * as userApi from "../services/users";
 import { FaGithub } from "react-icons/fa6";
 // import { FaGoogle } from "react-icons/fa6";
 import { useLoggedInUser } from "../hooks/useLoggInUser";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const schema = z.object({
   username: z
@@ -43,10 +45,12 @@ interface loginProps {
 
 const GITHUB_CLIENT_ID = "Ov23liqCybNboghZLnRs";
 // const GOOGLE_CLIENT_ID =
-  // "527880605810-penqdp4ejhfdc8mp53ddoh59samleqai.apps.googleusercontent.com";
+// "527880605810-penqdp4ejhfdc8mp53ddoh59samleqai.apps.googleusercontent.com";
 
 const Login = ({ onSuccessfulLogin }: loginProps) => {
   const toast = useToast();
+  const [show, setShow] = useState<boolean>(false);
+  const handleClick = () => setShow(!show);
   const { setCurrentUser } = useLoggedInUser();
   const {
     register,
@@ -63,10 +67,10 @@ const Login = ({ onSuccessfulLogin }: loginProps) => {
   };
 
   // const loginWithGoogle = () => {
-    // window.location.assign(
-      // "https://accounts.google.com/o/oauth2/v2/auth?client_id=" +
-        // GOOGLE_CLIENT_ID
-    // );
+  // window.location.assign(
+  // "https://accounts.google.com/o/oauth2/v2/auth?client_id=" +
+  // GOOGLE_CLIENT_ID
+  // );
   // };
 
   const onSubmit: SubmitHandler<formData> = async (data) => {
@@ -152,12 +156,20 @@ const Login = ({ onSuccessfulLogin }: loginProps) => {
           </FormControl>
           <FormControl isInvalid={errors.password ? true : false}>
             <FormLabel htmlFor="password">Password</FormLabel>
-            <Input
-              type="password"
-              {...register("password")}
-              id="password"
-              placeholder="password"
-            />
+            <InputGroup size="md">
+              <Input
+                pr="4.5rem"
+                type={show ? "text" : "password"}
+                {...register("password")}
+                id="password"
+                placeholder="password"
+              />
+              <InputRightElement>
+                <Button h="2rem" minW="4rem" size="sm" mr={8} padding={3} onClick={handleClick}>
+                  {show ? "Hide" : "Show"}
+                </Button>
+              </InputRightElement>
+            </InputGroup>
             <FormErrorMessage>{errors.password?.message}</FormErrorMessage>
           </FormControl>
           <Button ml="50%" transform="translateX(-50%)" mt="20px" type="submit">

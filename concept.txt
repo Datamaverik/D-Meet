@@ -1,0 +1,56 @@
+we have two kinds of protocols to get data from servers:
+1-TCP: it enusers that no packet loss occurs, it relies on third party servers
+        to transfer and fetch data
+2- UDP: it allows transfer of data to and fro from one device to another directly
+        but some packet loss might occur, it do not rely on third party servers
+
+socket and webRTC works on UDP protocols
+
+Our devices are assigned a public and a private IP addresses we use the public IP
+addresses to get info from net
+
+Our devices don't know their public ip addresses they know only their private  IP
+addresses. 
+
+#** WEB RTC **#
+
+#    Initialize
+we make requst to TURN/ICE servers which tells us about our public IP addresses
+
+#   Signalling
+although UDP following webRTC do not require third party servers but still we create a 
+a socket server which is responsible for sending and receiving public IP addresses of the 
+devices which we want to connect
+
+SDP: it has all the info public, private IP etc, we give this SDP to node server 
+    which we send to the device which we want to connect to.
+
+#   Connecting
+When the need for sending the IP addresses is over the devices are connecting directly
+without relying on third party servers like UDP following webRTC is supposed to.
+
+sending SDP is creating an offer and receiving the SDP is the answer that is recieved
+
+##  Drawback:
+only two people can connect at a time, it follows a P2P connection 
+one device has the SDP of other and other has the SDP of the one
+
+
+most used architecture SFU: Selective Forwarding Unit
+
+we require a server but server as a client
+
+we don't want MESH or P2P 
+
+#** SFU **#
+
+every client makes a connection with a virtual machine a P2P connection
+that virtual machine will create a stream of all the streams of the clients 
+connected to it and then send that merged stream to every client connected to it
+we are basically making a P2P connection only but using a client server to achieve
+the effect of a MESH without the scalability Drawback of the MESH
+
+
+RTCPeerConnection: creates and navigates peer to peer connections.
+RTCSessionDescription:  describes one end of a connection (or a potential
+    connection) and how it’s configured.

@@ -58,6 +58,7 @@ const Room = () => {
   const sendStreams = useCallback(() => {
     for (const track of myStream?.getTracks() ?? []) {
       //  sends my track to other user
+      console.log(track);
       peer.getPeer?.addTrack(track, myStream!);
     }
   }, [myStream]);
@@ -111,7 +112,7 @@ const Room = () => {
     socket?.on("incoming:call", handleIncomingCall);
     socket?.on("call:accepted", handleCallAccepted);
     socket?.on("peer:nego:needed", handleIncomingNego);
-    socket?.on("peer:nego:fina", handleNegoFinal);
+    socket?.on("peer:nego:final", handleNegoFinal);
 
     return () => {
       socket?.off("user:joined");

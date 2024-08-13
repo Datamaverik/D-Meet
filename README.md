@@ -105,8 +105,7 @@ We’ve integrated GitHub OAuth 2.0 for seamless user authentication. Users can 
 - **Room-Joining**
   <img src="Readme-assets/room_join.png" alt="Room_Join-Page">
 - **Room Page**
-  <img src="Readme-assets/room.
-  png" alt="Room-Page">
+  <img src="Readme-assets/room.png" alt="Room-Page">
 
 - **Chat Page**
   <img src="Readme-assets/chat.png" alt="Chat-Page">
